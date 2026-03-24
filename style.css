@@ -1,0 +1,76 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    background-color: #f4f7f6;
+    color: #333;
+}
+
+.main-header {
+    background: linear-gradient(135deg, #1b3d17 0%, #2d5a27 100%);
+    color: white;
+    padding: 3.5rem 1rem;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    background: #ffffff;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.main-nav a {
+    color: #2d5a27;
+    padding: 15px 20px;
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: 0.3s;
+}
+
+.main-nav a:hover {
+    background-color: #e8f5e9;
+}
+
+main {
+    max-width: 850px;
+    margin: 30px auto;
+    padding: 0 20px;
+}
+
+section {
+    background: white;
+    margin-bottom: 25px;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    border-top: 5px solid #4ade80;
+}
+
+h2 {
+    color: #1b3d17;
+    margin-top: 0;
+}
+
+.highlight {
+    border-top: 5px solid #27aae1;
+    background-color: #f0f9ff;
+}
+
+#meuGrafico {
+    max-width: 100%;
+    margin-top: 20px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px;
+    color: #777;
+    font-size: 0.9rem;
+}
