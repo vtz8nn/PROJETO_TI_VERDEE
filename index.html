@@ -3,62 +3,98 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>CodePen - A Pen by VICTOR </title>
+    <title>Untitled</title>
     <link rel="stylesheet" href="./style.css">
 
   </head>
     
   <body>
-  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<header class="main-header">
-    <h1>EcoTech: TI-Verde</h1>
-    <p>Tecnologia e Sustentabilidade para o Futuro</p>
+  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<header style="background: #1b3d17; color: white; padding: 30px 20px; text-align: center; font-family: sans-serif;">
+    <h1 style="margin: 0; font-size: 2em;">TI-Verde: Sustentabilidade Digital</h1>
+    <div style="margin-top: 20px;">
+        <input type="text" id="barraPesquisa" placeholder="Pesquisar empresas ou materiais..." style="padding: 12px 20px; width: 80%; max-width: 600px; border-radius: 25px; border: none; font-size: 1em; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
+    </div>
 </header>
 
-<nav class="main-nav">
-    <a href="#eficiencia">Eficiência</a>
-    <a href="#reciclagem">E-Lixo</a>
-    <a href="#pesquisa">Pesquisa</a>
-    <a href="#dashboard">Dashboard</a>
-    <a href="#ods">ODS 12</a>
-</nav>
+<main style="padding: 20px; max-width: 1000px; margin: auto; font-family: sans-serif; background: #f4f7f4;">
 
-<main>
-    <section id="eficiencia">
-        <h2>Eficiência Energética</h2>
-        <p>A otimização do uso de energia em Data Centers e estações de trabalho pode reduzir o impacto ambiental e os custos operacionais em até 30% através da virtualização.</p>
+    <section class="card-info">
+        <h3>Reciclagem de E-Lixo</h3>
+        <p>O descarte correto de hardware evita a contaminação por metais pesados. Promovemos pontos de coleta seletiva para garantir a economia circular dos componentes eletrônicos.</p>
     </section>
 
-    <section id="reciclagem">
-        <h2>Reciclagem de E-Lixo</h2>
-        <p>O descarte correto de hardware evita a contaminação por metais pesados. Promovemos pontos de coleta seletiva para garantir a economia circular dos componentes.</p>
+    <section class="card-info">
+        <h3>Eficiência Energética</h3>
+        <p>A otimização do uso de energia em Data Centers e estações de trabalho pode reduzir o impacto ambiental em até 30% através da virtualização e uso de hardware moderno.</p>
     </section>
 
-    <section id="pesquisa">
-        <h2>Pesquisa de Extensão (N=20)</h2>
+    <section class="card-info">
+        <h3>Pesquisa de Extensão (N=20)</h3>
         <p>Dados coletados com 3 empresas e 17 pessoas da comunidade local:</p>
-        <ul>
-            <li><strong>33%</strong> das empresas possuem políticas de descarte.</li>
-            <li><strong>70%</strong> do público desconhece pontos de coleta de e-lixo.</li>
-            <li><strong>85%</strong> desejam aprender mais sobre práticas de TI-Verde.</li>
+        <ul style="list-style: none; padding: 0;">
+            <li>✅ <b>33%</b> das empresas possuem políticas de descarte.</li>
+            <li>✅ <b>70%</b> do público desconhece pontos de coleta de e-lixo.</li>
+            <li>✅ <b>85%</b> desejam aprender mais sobre práticas de TI-Verde.</li>
         </ul>
     </section>
 
-    <section id="dashboard">
-        <h2>Dashboard Interativo</h2>
-        <p>Indicadores de impacto baseados na amostra da pesquisa:</p>
-        <canvas id="meuGrafico"></canvas>
+    <section id="dashboard" style="padding: 30px; background: white; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center;">
+        <h2 style="color: #1b3d17;">Monitoramento de Impacto</h2>
+        <div style="max-width: 500px; margin: auto;">
+            <canvas id="meuGrafico"></canvas>
+        </div>
     </section>
 
-    <section id="ods" class="highlight">
-        <h2>Alinhamento ODS 12</h2>
-        <p>Este projeto foca no <strong>Consumo e Produção Responsáveis</strong>, incentivando o uso consciente de recursos tecnológicos e o descarte adequado.</p>
+    <section class="card-info">
+        <h2 style="color: #1b3d17; border-bottom: 2px solid #1b3d17; padding-bottom: 10px;">Objetivo de Desenvolvimento Sustentável 12</h2>
+        <p>Assegurar padrões de produção e de consumo sustentáveis é essencial para reduzir a pegada ecológica. O descarte correto de TI é um pilar fundamental da ODS 12.</p>
+    </section>
+
+    <section id="admin-section" style="padding: 30px; background: #e8eee8; border-radius: 15px; border: 1px solid #ccd5cc;">
+        <div id="login-box" style="text-align: center;">
+            <h3 style="color: #1b3d17;">Área Restrita</h3>
+            <input type="password" id="senhaAdmin" placeholder="Chave de Acesso" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;"> 
+            <button onclick="verificarAcesso()" style="background: #1b3d17; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 5px;">Acessar Painel</button>
+        </div>
+
+        <div id="edit-panel" style="display: none;">
+            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
+                <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 10px;">
+                    <h4 style="margin: 0 0 10px 0;">Atualizar Indicadores (%)</h4>
+                    <label>Políticas:</label> <input type="number" id="in-politica" value="33" style="width: 100%; margin-bottom: 10px;">
+                    <label>Coleta:</label> <input type="number" id="in-coleta" value="70" style="width: 100%; margin-bottom: 10px;">
+                    <label>Interesse:</label> <input type="number" id="in-interesse" value="85" style="width: 100%; margin-bottom: 10px;">
+                    <button onclick="atualizarDadosGrafico()" style="width: 100%; background: #1b3d17; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">Salvar no Firebase</button>
+                </div>
+                
+                <div style="flex: 1; min-width: 250px; background: #dceddc; padding: 20px; border-radius: 10px;">
+                    <h4 style="margin: 0 0 10px 0;">♻️ Calculadora de Impacto</h4>
+                    <label>Qtd. de Lixo Eletrônico (unid):</label>
+                    <input type="number" id="qtd-lixo" placeholder="Ex: 10" style="width: 100%; margin-bottom: 10px;">
+                    <button onclick="calcularImpacto()" style="width: 100%; background: #2d5a27; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Simular</button>
+                    <p id="resultado-impacto" style="margin-top: 15px; font-weight: bold; color: #1b3d17;"></p>
+                </div>
+            </div>
+            <p style="text-align: center;"><button onclick="fazerLogout()" style="color: red; background: none; border: none; cursor: pointer; text-decoration: underline;">Sair do Painel</button></p>
+        </div>
     </section>
 </main>
 
-<footer>
-    <p>&copy; 2026 - Projeto TI-Verde - Nova Iguaçu/RJ</p>
-</footer>
+<style>
+    .card-info {
+        background: white; 
+        padding: 25px; 
+        border-radius: 12px; 
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        border-top: 4px solid #1b3d17;
+        margin-bottom: 20px;
+    }
+    .card-info h3 { color: #1b3d17; margin-top: 0; }
+</style>
     <script  src="./script.js"></script>
 
   </body>
