@@ -3,100 +3,279 @@
 
   <head>
     <meta charset="UTF-8">
-    <title>Untitled</title>
+    <title>uing</title>
     <link rel="stylesheet" href="./style.css">
 
   </head>
     
   <body>
-  <script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/9.6.1/firebase-database-compat.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TI-Verde: Sustentabilidade Digital</title>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
 
-<header style="background: #1b3d17; color: white; padding: 30px 20px; text-align: center; font-family: sans-serif;">
-    <h1 style="margin: 0; font-size: 2em;">TI-Verde: Sustentabilidade Digital</h1>
-    <div style="margin-top: 20px;">
-        <input type="text" id="barraPesquisa" placeholder="Pesquisar empresas ou materiais..." style="padding: 12px 20px; width: 80%; max-width: 600px; border-radius: 25px; border: none; font-size: 1em; box-shadow: 0 4px 10px rgba(0,0,0,0.2);">
-    </div>
-</header>
+        :root {
+            --primary-green: #1b4332;
+            --accent-green: #2d6a4f;
+            --light-green: #d8f3dc;
+            --bg-gray: #f8f9fa;
+            --text-dark: #212529;
+            --white: #ffffff;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            --ods-color: #bf8b2e;
+        }
 
-<main style="padding: 20px; max-width: 1000px; margin: auto; font-family: sans-serif; background: #f4f7f4;">
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Inter', sans-serif; background-color: var(--bg-gray); color: var(--text-dark); line-height: 1.6; }
 
-    <section class="card-info">
-        <h3>Reciclagem de E-Lixo</h3>
-        <p>O descarte correto de hardware evita a contaminação por metais pesados. Promovemos pontos de coleta seletiva para garantir a economia circular dos componentes eletrônicos.</p>
-    </section>
+        header {
+            background: linear-gradient(135deg, var(--primary-green) 0%, var(--accent-green) 100%);
+            color: var(--white);
+            padding: 40px 20px;
+            text-align: center;
+            margin-bottom: 30px;
+        }
 
-    <section class="card-info">
-        <h3>Eficiência Energética</h3>
-        <p>A otimização do uso de energia em Data Centers e estações de trabalho pode reduzir o impacto ambiental em até 30% através da virtualização e uso de hardware moderno.</p>
-    </section>
+        #search-input {
+            width: 100%;
+            max-width: 500px;
+            padding: 12px 20px;
+            border-radius: 30px;
+            border: none;
+            font-size: 1rem;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            outline: none;
+            margin-top: 15px;
+        }
 
-    <section class="card-info">
-        <h3>Pesquisa de Extensão (N=20)</h3>
-        <p>Dados coletados com 3 empresas e 17 pessoas da comunidade local:</p>
-        <ul style="list-style: none; padding: 0;">
-            <li>✅ <b>33%</b> das empresas possuem políticas de descarte.</li>
-            <li>✅ <b>70%</b> do público desconhece pontos de coleta de e-lixo.</li>
-            <li>✅ <b>85%</b> desejam aprender mais sobre práticas de TI-Verde.</li>
-        </ul>
-    </section>
+        main { max-width: 900px; margin: 0 auto; padding: 0 20px; }
 
-    <section id="dashboard" style="padding: 30px; background: white; border-radius: 15px; margin-bottom: 30px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); text-align: center;">
-        <h2 style="color: #1b3d17;">Monitoramento de Impacto</h2>
-        <div style="max-width: 500px; margin: auto;">
-            <canvas id="meuGrafico"></canvas>
+        .card-highlights {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+
+        .card {
+            background-color: var(--white);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            box-shadow: var(--shadow);
+            border-left: 5px solid var(--accent-green);
+            flex: 1;
+        }
+
+        .card-highlights .card { margin-bottom: 0; border-left: none; border-bottom: 5px solid var(--accent-green); }
+
+        .card h3 { color: var(--primary-green); margin-bottom: 12px; border-bottom: 1px solid #eee; padding-bottom: 5px; font-size: 1rem; }
+        .card p { font-size: 0.85rem; }
+        
+        .qualitative-section { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 15px; 
+            margin-bottom: 25px; 
+            border: 2px solid #ccc;
+        }
+        .qualitative-section h3 { color: var(--primary-green); border: none; font-size: 1.1rem; }
+        .qualitative-section p { font-size: 0.9rem; }
+
+        .ods-section { 
+            background: #fff; 
+            padding: 30px; 
+            border-radius: 15px; 
+            border: 2px dashed var(--ods-color); 
+            margin-bottom: 25px; 
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .ods-header { display: flex; align-items: center; gap: 15px; }
+        .ods-logo { 
+            min-width: 70px; height: 70px; 
+            background: var(--ods-color); 
+            color: white; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            font-weight: 800; 
+            border-radius: 10px; 
+            font-size: 1.1rem; 
+            text-align: center; 
+            box-shadow: 0 4px 10px rgba(191, 139, 46, 0.3);
+        }
+
+        /* Estilos Novos para a Seção de Dicas e Conceito */
+        .grid-final {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-bottom: 25px;
+        }
+        .tips-list { list-style: none; font-size: 0.8rem; margin-top: 10px; }
+        .tips-list li { margin-bottom: 8px; padding-left: 15px; position: relative; }
+        .tips-list li::before { content: "✔"; position: absolute; left: 0; color: var(--accent-green); font-weight: bold; }
+
+        .chart-controls { text-align: center; margin-bottom: 15px; }
+        .btn-filter { background: #eee; border: 1px solid #ccc; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; margin: 2px; transition: 0.3s; }
+        .btn-filter.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+
+        .area-restrita { background-color: #e9ecef; padding: 40px 20px; text-align: center; margin-top: 50px; border-radius: 20px 20px 0 0; }
+        #access-key { padding: 10px 15px; border-radius: 8px; border: 1px solid #ddd; margin-right: 10px; }
+        button { background-color: var(--primary-green); color: white; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; }
+        
+        @media (max-width: 768px) { 
+            .card-highlights, .grid-final { flex-direction: column; grid-template-columns: 1fr; } 
+            .ods-header { flex-direction: column; text-align: center; } 
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>TI-Verde: Sustentabilidade Digital</h1>
+        <p>Análise de Extensão: Nova Iguaçu (N=20)</p>
+        <input type="text" id="search-input" placeholder="Pesquisar EcoTech, standby, intenção...">
+    </header>
+
+    <main id="cards-container">
+        
+        <section class="card-highlights">
+            <div class="card" data-search="conciencia coletiva meio ambiente social">
+                <h3>Consciência Coletiva Elevada</h3>
+                <p>75% do público reconhece o benefício direto da TI Verde na qualidade de vida e no meio ambiente, superando até a economia financeira.</p>
+            </div>
+            <div class="card" data-search="desafio modo espera standby educacao">
+                <h3>Desafio do Modo de Espera</h3>
+                <p>Apenas 40% do público entrevistado tem o hábito de tirar aparelhos do standby, evidenciando a necessidade de educação ambiental.</p>
+            </div>
+            <div class="card" data-search="infraestrutura elite data center eficiente ecotech greendata tech sustentavel">
+                <h3>Infraestrutura Corporativa</h3>
+                <p>Empresas EcoTech e GreenData operam com data centers de alta eficiência energética, comprovando adesão de ponta.</p>
+            </div>
+        </section>
+
+        <section class="qualitative-section" data-search="intenção qualidade ecotech greendata tech sustentavel custo infraestrutura barreiras obstaculos">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                <h3>Pesquisa Qualitativa de Intenção</h3>
+                <span style="font-size: 0.8rem; font-weight: bold; background: #eee; padding: 5px 10px; border-radius: 5px;">3 Empresas / 17 Pessoas</span>
+            </div>
+            <p style="margin-bottom: 10px;">
+                A análise qualitativa para as empresas **EcoTech Soluções**, **GreenData Brasil** e **Tech Sustentável LTDA** confirma que a TI Verde é estratégica para redução de custos (energia e papel) e fortalecimento da imagem corporativa.
+            </p>
+            <p>
+                No público geral, a intenção de ser sustentável é alta (75% aprovam), mas a **falta de infraestrutura de descarte** na Baixada Fluminense e o alto custo inicial de dispositivos eficientes são barreiras que impedem a prática total no dia a dia.
+            </p>
+        </section>
+
+        <div class="card" data-search="grafico dashboard interativo amostra comparativo quantitativo">
+            <h3>Dashboard Quantitativo da Pesquisa</h3>
+            <div class="chart-controls">
+                <button class="btn-filter active" onclick="updateChart('all', this)">Comparar Todos</button>
+                <button class="btn-filter" onclick="updateChart('empresas', this)">Ver Empresas</button>
+                <button class="btn-filter" onclick="updateChart('publico', this)">Ver Público</button>
+            </div>
+            <canvas id="impactChart" style="max-height: 350px;"></canvas>
         </div>
-    </section>
 
-    <section class="card-info">
-        <h2 style="color: #1b3d17; border-bottom: 2px solid #1b3d17; padding-bottom: 10px;">Objetivo de Desenvolvimento Sustentável 12</h2>
-        <p>Assegurar padrões de produção e de consumo sustentáveis é essencial para reduzir a pegada ecológica. O descarte correto de TI é um pilar fundamental da ODS 12.</p>
-    </section>
-
-    <section id="admin-section" style="padding: 30px; background: #e8eee8; border-radius: 15px; border: 1px solid #ccd5cc;">
-        <div id="login-box" style="text-align: center;">
-            <h3 style="color: #1b3d17;">Área Restrita</h3>
-            <input type="password" id="senhaAdmin" placeholder="Chave de Acesso" style="padding: 8px; border-radius: 5px; border: 1px solid #ccc;"> 
-            <button onclick="verificarAcesso()" style="background: #1b3d17; color: white; border: none; padding: 8px 15px; cursor: pointer; border-radius: 5px;">Acessar Painel</button>
-        </div>
-
-        <div id="edit-panel" style="display: none;">
-            <div style="display: flex; flex-wrap: wrap; gap: 20px;">
-                <div style="flex: 1; min-width: 250px; background: white; padding: 20px; border-radius: 10px;">
-                    <h4 style="margin: 0 0 10px 0;">Atualizar Indicadores (%)</h4>
-                    <label>Políticas:</label> <input type="number" id="in-politica" value="33" style="width: 100%; margin-bottom: 10px;">
-                    <label>Coleta:</label> <input type="number" id="in-coleta" value="70" style="width: 100%; margin-bottom: 10px;">
-                    <label>Interesse:</label> <input type="number" id="in-interesse" value="85" style="width: 100%; margin-bottom: 10px;">
-                    <button onclick="atualizarDadosGrafico()" style="width: 100%; background: #1b3d17; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">Salvar no Firebase</button>
-                </div>
-                
-                <div style="flex: 1; min-width: 250px; background: #dceddc; padding: 20px; border-radius: 10px;">
-                    <h4 style="margin: 0 0 10px 0;">♻️ Calculadora de Impacto</h4>
-                    <label>Qtd. de Lixo Eletrônico (unid):</label>
-                    <input type="number" id="qtd-lixo" placeholder="Ex: 10" style="width: 100%; margin-bottom: 10px;">
-                    <button onclick="calcularImpacto()" style="width: 100%; background: #2d5a27; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer;">Simular</button>
-                    <p id="resultado-impacto" style="margin-top: 15px; font-weight: bold; color: #1b3d17;"></p>
+        <div class="ods-section" data-search="ods 12 objetivo desenvolvimento sustentavel onu consumo responsavel">
+            <div class="ods-header">
+                <div class="ods-logo">ODS 12</div>
+                <div>
+                    <h3 style="color: var(--ods-color); border: none;">Consumo e Produção Responsáveis</h3>
+                    <p style="font-weight: 600; font-size: 0.85rem; color: #666;">Alinhamento Estratégico ONU</p>
                 </div>
             </div>
-            <p style="text-align: center;"><button onclick="fazerLogout()" style="color: red; background: none; border: none; cursor: pointer; text-decoration: underline;">Sair do Painel</button></p>
+            <p style="font-size: 0.95rem;">
+                O projeto **TI-Verde** valida a **ODS 12** ao evidenciar que a transição digital reduz resíduos sólidos. Com 100% de eficiência corporativa em data centers, a pesquisa mostra que o público de Nova Iguaçu está pronto para adoção em massa, desde que o município invista em infraestrutura de descarte ambientalmente responsável.
+            </p>
+        </div>
+
+        <section class="grid-final">
+            <div class="card" data-search="o que é ti verde conceito definição sustentabilidade">
+                <h3>O que é TI Verde?</h3>
+                <p>É o uso sustentável da tecnologia para reduzir o impacto ambiental. Envolve desde o consumo eficiente de energia em servidores até o descarte responsável de hardware antigo, visando uma pegada digital neutra.</p>
+            </div>
+
+            <div class="card" data-search="boas práticas dicas ação empresa pessoa">
+                <h3>Boas Práticas e Dicas</h3>
+                <ul class="tips-list">
+                    <li><strong>Pessoas:</strong> Tire aparelhos do standby e limpe caches de e-mail.</li>
+                    <li><strong>Empresas:</strong> Migre para a Nuvem e adote políticas paperless.</li>
+                    <li><strong>Social:</strong> Doe eletrônicos funcionais para inclusão digital.</li>
+                </ul>
+            </div>
+        </section>
+
+    </main>
+
+    <section class="area-restrita">
+        <h4>Acesso Administrativo</h4>
+        <div style="margin-top: 15px;">
+            <input type="password" id="access-key" placeholder="Chave de Acesso">
+            <button id="btn-acessar">Acessar Painel</button>
         </div>
     </section>
-</main>
 
-<style>
-    .card-info {
-        background: white; 
-        padding: 25px; 
-        border-radius: 12px; 
-        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        border-top: 4px solid #1b3d17;
-        margin-bottom: 20px;
-    }
-    .card-info h3 { color: #1b3d17; margin-top: 0; }
-</style>
-    <script  src="./script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <script>
+        let myChart;
+
+        window.onload = function() {
+            const inputPesquisa = document.getElementById('search-input');
+            inputPesquisa.addEventListener('keyup', function() {
+                let termo = inputPesquisa.value.toLowerCase();
+                let cards = document.querySelectorAll('.card, .ods-section, .qualitative-section');
+
+                cards.forEach(card => {
+                    let conteudo = card.getAttribute('data-search') || "";
+                    let textoVisivel = card.innerText.toLowerCase();
+                    card.style.display = (conteudo.includes(termo) || textoVisivel.includes(termo)) ? "block" : "none";
+                });
+            });
+
+            const ctx = document.getElementById('impactChart').getContext('2d');
+            myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Papel', 'Energia', 'Descarte', 'Social'],
+                    datasets: [
+                        { label: 'Empresas (%)', data: [100, 100, 100, 100], backgroundColor: '#1b4332', borderRadius: 5 },
+                        { label: 'Público Geral (%)', data: [70, 65, 60, 75], backgroundColor: '#74c69d', borderRadius: 5 }
+                    ]
+                },
+                options: { 
+                    responsive: true, 
+                    plugins: { legend: { position: 'bottom' } },
+                    scales: { y: { beginAtZero: true, max: 110, title: { display: true, text: 'Adesão %' } } } 
+                }
+            });
+
+            document.getElementById('btn-acessar').onclick = function() {
+                const senha = document.getElementById('access-key').value;
+                alert(senha === "1234" ? "Acesso autorizado!" : "Senha inválida.");
+            };
+        };
+
+        function updateChart(mode, btn) {
+            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
+            btn.classList.add('active');
+            if(mode === 'all') { myChart.setDatasetVisibility(0, true); myChart.setDatasetVisibility(1, true); }
+            else if(mode === 'empresas') { myChart.setDatasetVisibility(0, true); myChart.setDatasetVisibility(1, false); }
+            else { myChart.setDatasetVisibility(0, false); myChart.setDatasetVisibility(1, true); }
+            myChart.update();
+        }
+    </script>
+</body>
+</html>
+    
   </body>
   
 </html>
