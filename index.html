@@ -111,7 +111,6 @@
             box-shadow: 0 4px 10px rgba(191, 139, 46, 0.3);
         }
 
-        /* Estilos Novos para a Seção de Dicas e Conceito */
         .grid-final {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -122,14 +121,15 @@
         .tips-list li { margin-bottom: 8px; padding-left: 15px; position: relative; }
         .tips-list li::before { content: "✔"; position: absolute; left: 0; color: var(--accent-green); font-weight: bold; }
 
-        .chart-controls { text-align: center; margin-bottom: 15px; }
-        .btn-filter { background: #eee; border: 1px solid #ccc; padding: 8px 15px; border-radius: 20px; cursor: pointer; font-size: 0.8rem; margin: 2px; transition: 0.3s; }
-        .btn-filter.active { background: var(--accent-green); color: white; border-color: var(--accent-green); }
+        .chart-info {
+            background: #f1f8f5;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            margin-bottom: 15px;
+            border: 1px solid var(--light-green);
+        }
 
-        .area-restrita { background-color: #e9ecef; padding: 40px 20px; text-align: center; margin-top: 50px; border-radius: 20px 20px 0 0; }
-        #access-key { padding: 10px 15px; border-radius: 8px; border: 1px solid #ddd; margin-right: 10px; }
-        button { background-color: var(--primary-green); color: white; border: none; padding: 10px 25px; border-radius: 8px; cursor: pointer; font-weight: 600; transition: 0.3s; }
-        
         @media (max-width: 768px) { 
             .card-highlights, .grid-final { flex-direction: column; grid-template-columns: 1fr; } 
             .ods-header { flex-direction: column; text-align: center; } 
@@ -138,141 +138,112 @@
 </head>
 <body>
 
-    <header>
-        <h1>TI-Verde: Sustentabilidade Digital</h1>
-        <p>Análise de Extensão: Nova Iguaçu (N=20)</p>
-        <input type="text" id="search-input" placeholder="Pesquisar EcoTech, standby, intenção...">
-    </header>
+<header>
+    <h1>TI-Verde: Sustentabilidade Digital</h1>
+    <p>Projeto de Extensão - UNIG | Nova Iguaçu</p>
+    <input type="text" id="search-input" placeholder="Pesquisar conceitos, dicas ou dados...">
+</header>
 
-    <main id="cards-container">
-        
-        <section class="card-highlights">
-            <div class="card" data-search="conciencia coletiva meio ambiente social">
-                <h3>Consciência Coletiva Elevada</h3>
-                <p>75% do público reconhece o benefício direto da TI Verde na qualidade de vida e no meio ambiente, superando até a economia financeira.</p>
-            </div>
-            <div class="card" data-search="desafio modo espera standby educacao">
-                <h3>Desafio do Modo de Espera</h3>
-                <p>Apenas 40% do público entrevistado tem o hábito de tirar aparelhos do standby, evidenciando a necessidade de educação ambiental.</p>
-            </div>
-            <div class="card" data-search="infraestrutura elite data center eficiente ecotech greendata tech sustentavel">
-                <h3>Infraestrutura Corporativa</h3>
-                <p>Empresas EcoTech e GreenData operam com data centers de alta eficiência energética, comprovando adesão de ponta.</p>
-            </div>
-        </section>
+<main id="cards-container">
 
-        <section class="qualitative-section" data-search="intenção qualidade ecotech greendata tech sustentavel custo infraestrutura barreiras obstaculos">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                <h3>Pesquisa Qualitativa de Intenção</h3>
-                <span style="font-size: 0.8rem; font-weight: bold; background: #eee; padding: 5px 10px; border-radius: 5px;">3 Empresas / 17 Pessoas</span>
-            </div>
-            <p style="margin-bottom: 10px;">
-                A análise qualitativa para as empresas **EcoTech Soluções**, **GreenData Brasil** e **Tech Sustentável LTDA** confirma que a TI Verde é estratégica para redução de custos (energia e papel) e fortalecimento da imagem corporativa.
-            </p>
-            <p>
-                No público geral, a intenção de ser sustentável é alta (75% aprovam), mas a **falta de infraestrutura de descarte** na Baixada Fluminense e o alto custo inicial de dispositivos eficientes são barreiras que impedem a prática total no dia a dia.
-            </p>
-        </section>
+<section class="grid-final">
+    <div class="card">
+        <h3>O que é TI Verde? (Green IT)</h3>
+        <p>TI Verde (Green IT) é o uso sustentável da tecnologia com o objetivo de reduzir impactos ambientais. Envolve práticas como economia de energia, redução do uso de papel, descarte correto de equipamentos eletrônicos e uso consciente dos recursos digitais, contribuindo para um ambiente mais sustentável e melhor qualidade de vida.</p>
+    </div>
 
-        <div class="card" data-search="grafico dashboard interativo amostra comparativo quantitativo">
-            <h3>Dashboard Quantitativo da Pesquisa</h3>
-            <div class="chart-controls">
-                <button class="btn-filter active" onclick="updateChart('all', this)">Comparar Todos</button>
-                <button class="btn-filter" onclick="updateChart('empresas', this)">Ver Empresas</button>
-                <button class="btn-filter" onclick="updateChart('publico', this)">Ver Público</button>
-            </div>
-            <canvas id="impactChart" style="max-height: 350px;"></canvas>
+    <div class="card">
+        <h3>Como Aplicar na Prática?</h3>
+        <ul class="tips-list">
+            <li><strong>Virtualização:</strong> reduzir máquinas físicas.</li>
+            <li><strong>E-waste:</strong> descarte correto de eletrônicos.</li>
+            <li><strong>Cloud Computing:</strong> uso de nuvem.</li>
+            <li><strong>Exemplo real:</strong> uso de PDFs para evitar papel.</li>
+            <li><strong>Exemplo real:</strong> desligar equipamentos para economizar energia.</li>
+        </ul>
+    </div>
+</section>
+
+<div class="card">
+    <h3>Dashboard Quantitativo: Amostra Local</h3>
+
+    <div class="chart-info">
+        <strong>Metodologia:</strong> Pesquisa realizada em Nova Iguaçu com questionário digital e entrevistas presenciais.<br>
+        <strong>Público:</strong> 20 participantes (17 pessoas e 3 empresas).<br><br>
+
+        <strong>Perguntas aplicadas:</strong>
+        <ul>
+            <li>Uso de documentos digitais para reduzir papel</li>
+            <li>Descarte de eletrônicos</li>
+            <li>Uso de economia de energia</li>
+            <li>Percepção sobre TI Verde</li>
+        </ul>
+    </div>
+
+    <canvas id="impactChart"></canvas>
+</div>
+
+<section class="card-highlights">
+    <div class="card">
+        <h3>Consciência Coletiva</h3>
+        <p>75% reconhecem que a TI Verde melhora a qualidade de vida local.</p>
+    </div>
+    <div class="card">
+        <h3>O Inimigo Invisível</h3>
+        <p>Modo standby ainda é ignorado, gerando desperdício de energia.</p>
+    </div>
+</section>
+
+<section class="qualitative-section">
+    <h3>Exemplos Reais e Estudos de Caso</h3>
+    <p>Empresas reduziram custos com energia ao usar servidores eficientes.</p>
+    <p>Uso de nuvem diminui necessidade de hardware físico.</p>
+</section>
+
+<div class="ods-section">
+    <div class="ods-header">
+        <div class="ods-logo">ODS 12</div>
+        <div>
+            <h3>Consumo Responsável</h3>
         </div>
+    </div>
+    <p>Relaciona-se com sustentabilidade e redução de resíduos.</p>
+</div>
 
-        <div class="ods-section" data-search="ods 12 objetivo desenvolvimento sustentavel onu consumo responsavel">
-            <div class="ods-header">
-                <div class="ods-logo">ODS 12</div>
-                <div>
-                    <h3 style="color: var(--ods-color); border: none;">Consumo e Produção Responsáveis</h3>
-                    <p style="font-weight: 600; font-size: 0.85rem; color: #666;">Alinhamento Estratégico ONU</p>
-                </div>
-            </div>
-            <p style="font-size: 0.95rem;">
-                O projeto **TI-Verde** valida a **ODS 12** ao evidenciar que a transição digital reduz resíduos sólidos. Com 100% de eficiência corporativa em data centers, a pesquisa mostra que o público de Nova Iguaçu está pronto para adoção em massa, desde que o município invista em infraestrutura de descarte ambientalmente responsável.
-            </p>
-        </div>
+</main>
 
-        <section class="grid-final">
-            <div class="card" data-search="o que é ti verde conceito definição sustentabilidade">
-                <h3>O que é TI Verde?</h3>
-                <p>É o uso sustentável da tecnologia para reduzir o impacto ambiental. Envolve desde o consumo eficiente de energia em servidores até o descarte responsável de hardware antigo, visando uma pegada digital neutra.</p>
-            </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-            <div class="card" data-search="boas práticas dicas ação empresa pessoa">
-                <h3>Boas Práticas e Dicas</h3>
-                <ul class="tips-list">
-                    <li><strong>Pessoas:</strong> Tire aparelhos do standby e limpe caches de e-mail.</li>
-                    <li><strong>Empresas:</strong> Migre para a Nuvem e adote políticas paperless.</li>
-                    <li><strong>Social:</strong> Doe eletrônicos funcionais para inclusão digital.</li>
-                </ul>
-            </div>
-        </section>
+<script>
+const ctx = document.getElementById('impactChart');
 
-    </main>
+new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Uso de Papel', 'Consumo de Energia', 'Descarte Eletrônico', 'Consciência Sustentável'],
+        datasets: [{
+            label: 'Resultado (%)',
+            data: [70, 40, 55, 75]
+        }]
+    }
+});
+</script>
 
-    <section class="area-restrita">
-        <h4>Acesso Administrativo</h4>
-        <div style="margin-top: 15px;">
-            <input type="password" id="access-key" placeholder="Chave de Acesso">
-            <button id="btn-acessar">Acessar Painel</button>
-        </div>
-    </section>
+<!-- BARRA DE PESQUISA FUNCIONANDO -->
+<script>
+const inputPesquisa = document.getElementById('search-input');
 
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+inputPesquisa.addEventListener('keyup', function() {
+    let termo = inputPesquisa.value.toLowerCase();
+    let elementos = document.querySelectorAll('.card, .ods-section, .qualitative-section');
 
-    <script>
-        let myChart;
+    elementos.forEach(el => {
+        let texto = el.innerText.toLowerCase();
+        el.style.display = texto.includes(termo) ? "block" : "none";
+    });
+});
+</script>
 
-        window.onload = function() {
-            const inputPesquisa = document.getElementById('search-input');
-            inputPesquisa.addEventListener('keyup', function() {
-                let termo = inputPesquisa.value.toLowerCase();
-                let cards = document.querySelectorAll('.card, .ods-section, .qualitative-section');
-
-                cards.forEach(card => {
-                    let conteudo = card.getAttribute('data-search') || "";
-                    let textoVisivel = card.innerText.toLowerCase();
-                    card.style.display = (conteudo.includes(termo) || textoVisivel.includes(termo)) ? "block" : "none";
-                });
-            });
-
-            const ctx = document.getElementById('impactChart').getContext('2d');
-            myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Papel', 'Energia', 'Descarte', 'Social'],
-                    datasets: [
-                        { label: 'Empresas (%)', data: [100, 100, 100, 100], backgroundColor: '#1b4332', borderRadius: 5 },
-                        { label: 'Público Geral (%)', data: [70, 65, 60, 75], backgroundColor: '#74c69d', borderRadius: 5 }
-                    ]
-                },
-                options: { 
-                    responsive: true, 
-                    plugins: { legend: { position: 'bottom' } },
-                    scales: { y: { beginAtZero: true, max: 110, title: { display: true, text: 'Adesão %' } } } 
-                }
-            });
-
-            document.getElementById('btn-acessar').onclick = function() {
-                const senha = document.getElementById('access-key').value;
-                alert(senha === "1234" ? "Acesso autorizado!" : "Senha inválida.");
-            };
-        };
-
-        function updateChart(mode, btn) {
-            document.querySelectorAll('.btn-filter').forEach(b => b.classList.remove('active'));
-            btn.classList.add('active');
-            if(mode === 'all') { myChart.setDatasetVisibility(0, true); myChart.setDatasetVisibility(1, true); }
-            else if(mode === 'empresas') { myChart.setDatasetVisibility(0, true); myChart.setDatasetVisibility(1, false); }
-            else { myChart.setDatasetVisibility(0, false); myChart.setDatasetVisibility(1, true); }
-            myChart.update();
-        }
-    </script>
 </body>
 </html>
     
